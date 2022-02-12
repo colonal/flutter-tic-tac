@@ -50,3 +50,4 @@ keystore1.jks
 keystore.jks
 
 /android/key.properties
+.gitignore
