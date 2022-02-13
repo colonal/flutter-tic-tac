@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           statusBarColor: Color(0xff000619),
 
           // Status bar brightness (optional)
-          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+          statusBarIconBrightness: Brightness.light, // For Android (dark icons)
           statusBarBrightness: Brightness.light, // For iOS (dark icons)
         ),
       ),

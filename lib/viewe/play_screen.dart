@@ -7,6 +7,8 @@ import 'package:tic_tac_game/Cubit/state.dart';
 
 import 'line_widget.dart';
 
+double si = 0;
+
 class PlayScreen extends StatelessWidget {
   final bool isAutoplay;
   const PlayScreen(this.isAutoplay, {Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class PlayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double widthS = MediaQuery.of(context).size.width;
     double heightS = MediaQuery.of(context).size.height;
+    si = heightS * .5;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -26,7 +29,7 @@ class PlayScreen extends StatelessWidget {
 
             // Status bar brightness (optional)
             statusBarIconBrightness:
-                Brightness.dark, // For Android (dark icons)
+                Brightness.light, // For Android (dark icons)
             statusBarBrightness: Brightness.light, // For iOS (dark icons)
           ),
           actions: [
@@ -71,6 +74,36 @@ class PlayScreen extends StatelessWidget {
                     ),
                   );
                 }
+                if (MediaQuery.of(context).orientation ==
+                    Orientation.landscape) {
+                  return Container(
+                    width: widthS,
+                    height: heightS,
+                    color: const Color(0xff000619),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _titleSpace(heightS),
+                                _textWinPlay(context),
+                                _bottonSpace(heightS),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: _playSpace(widthS, heightS, context, true),
+                        ),
+                      ],
+                    ),
+                  );
+                }
                 return Container(
                   width: widthS,
                   color: const Color(0xff000619),
@@ -78,360 +111,11 @@ class PlayScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(height: heightS < 450 ? 0 : 20),
-                      LayoutBuilder(builder: (context, size) {
-                        return Text(
-                          'IT\'S TURN! ${HomeCubit.get(context).player ? " X" : "O"}',
-                          style: TextStyle(
-                              fontSize: size.maxWidth > heightS
-                                  ? heightS * 0.1
-                                  : size.maxWidth * 0.1,
-                              color: Colors.white),
-                          textAlign: TextAlign.center,
-                        );
-                      }),
+                      _titleSpace(heightS),
                       SizedBox(height: heightS < 450 ? 0 : 40),
-                      Stack(children: [
-                        if (1 == 1)
-                          SizedBox(
-                            width: widthS,
-                            height: heightS * 0.5,
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.topLeft,
-                                            function:
-                                                HomeCubit.get(context).p1 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("1");
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p1,
-                                            context: context,
-                                          ),
-                                        ),
-                                        Expanded(flex: 1, child: Container()),
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.topCenter,
-                                            function:
-                                                HomeCubit.get(context).p2 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("2");
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p2,
-                                            context: context,
-                                          ),
-                                        ),
-                                        Expanded(flex: 1, child: Container()),
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.topRight,
-                                            function:
-                                                HomeCubit.get(context).p3 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("3");
-
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p3,
-                                            context: context,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 15),
-                                  Expanded(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.centerLeft,
-                                            function:
-                                                HomeCubit.get(context).p4 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("4");
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p4,
-                                            context: context,
-                                          ),
-                                        ),
-                                        Expanded(flex: 1, child: Container()),
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.center,
-                                            function:
-                                                HomeCubit.get(context).p5 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("5");
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p5,
-                                            context: context,
-                                          ),
-                                        ),
-                                        Expanded(flex: 1, child: Container()),
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.centerRight,
-                                            function:
-                                                HomeCubit.get(context).p6 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("6");
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p6,
-                                            context: context,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 15),
-                                  Expanded(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            flex: 3,
-                                            child: newButton(
-                                              alignment: Alignment.bottomLeft,
-                                              function: HomeCubit.get(context)
-                                                          .p7 ==
-                                                      ""
-                                                  ? () {
-                                                      HomeCubit.get(context)
-                                                          .playChange("7");
-
-                                                      if (isAutoplay) {
-                                                        HomeCubit.get(context)
-                                                            .autoPlay();
-                                                      }
-                                                    }
-                                                  : null,
-                                              value: HomeCubit.get(context).p7,
-                                              context: context,
-                                            )),
-                                        Expanded(flex: 1, child: Container()),
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.bottomCenter,
-                                            function:
-                                                HomeCubit.get(context).p8 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("8");
-
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p8,
-                                            context: context,
-                                          ),
-                                        ),
-                                        Expanded(flex: 1, child: Container()),
-                                        Expanded(
-                                          flex: 3,
-                                          child: newButton(
-                                            alignment: Alignment.bottomRight,
-                                            function:
-                                                HomeCubit.get(context).p9 == ""
-                                                    ? () {
-                                                        HomeCubit.get(context)
-                                                            .playChange("9");
-
-                                                        if (isAutoplay) {
-                                                          HomeCubit.get(context)
-                                                              .autoPlay();
-                                                        }
-                                                      }
-                                                    : null,
-                                            value: HomeCubit.get(context).p9,
-                                            context: context,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        SizedBox(
-                          width: widthS,
-                          height: heightS * 0.5,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                        flex: 3,
-                                        child: (HomeCubit.get(context)
-                                                .verticalLine1)
-                                            ? line(
-                                                2, heightS, Alignment.topLeft)
-                                            : Container()),
-                                    Expanded(flex: 1, child: Container()),
-                                    Expanded(
-                                        flex: 3,
-                                        child: (HomeCubit.get(context)
-                                                .verticalLine2)
-                                            ? line(2, heightS, Alignment.center)
-                                            : Container()),
-                                    Expanded(flex: 1, child: Container()),
-                                    Expanded(
-                                        flex: 3,
-                                        child: (HomeCubit.get(context)
-                                                .verticalLine3)
-                                            ? line(
-                                                2, heightS, Alignment.topRight)
-                                            : Container()),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          width: widthS,
-                          height: heightS * 0.5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if (HomeCubit.get(context).horizontalLine1)
-                                Line(1, widthS - 15),
-                              const SizedBox(height: 15),
-                              if (HomeCubit.get(context).horizontalLine2)
-                                Line(1, widthS - 30),
-                              const SizedBox(height: 15),
-                              if (HomeCubit.get(context).horizontalLine3)
-                                Line(1, widthS - 30),
-                            ],
-                          ),
-                        ),
-                        if (HomeCubit.get(context).zLine1)
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 30.0),
-                            child: Container(
-                                width: widthS,
-                                height: heightS * 0.50,
-                                padding: const EdgeInsets.all(40),
-                                child: const Line(0, 0.0)),
-                          ),
-                        if (HomeCubit.get(context).zLine2)
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 30.0),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(40),
-                              height: heightS * 0.50,
-                              child: const Line(0, 0.0, isZ2: true),
-                            ),
-                          )
-                      ]),
-                      Expanded(
-                          child: Center(
-                        child: Text(
-                          HomeCubit.get(context).winPlayer,
-                          style: const TextStyle(
-                              fontSize: 30, color: Colors.white),
-                        ),
-                      )),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: LayoutBuilder(builder: (context, size) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        heightS > 500 ? size.maxWidth * 0.1 : 0,
-                                    vertical: heightS > 500 ? 10 : 0),
-                                child: MaterialButton(
-                                  onPressed: HomeCubit.get(context).resatGame,
-                                  color: const Color(0xff001355),
-                                  height: heightS * 0.1,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: Text(
-                                    "Repeat The Game",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: size.maxWidth > heightS
-                                            ? heightS * 0.06
-                                            : size.maxWidth * 0.06),
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
-                        ],
-                      ),
+                      _playSpace(widthS, heightS, context, false),
+                      _textWinPlay(context),
+                      _bottonSpace(heightS),
                       // const SizedBox(height: 15),
                     ],
                   ),
@@ -440,7 +124,337 @@ class PlayScreen extends StatelessWidget {
         ));
   }
 
-  Widget line(int state, double heightS, AlignmentGeometry alignment) {
+  Row _bottonSpace(double heightS) {
+    return Row(
+      children: [
+        Expanded(
+          child: LayoutBuilder(builder: (context, size) {
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: heightS > 500 ? size.maxWidth * 0.1 : 0,
+                  vertical: heightS > 500 ? 10 : 0),
+              child: MaterialButton(
+                onPressed: HomeCubit.get(context).resatGame,
+                color: const Color(0xff001355),
+                height: heightS * 0.1,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: Text(
+                  "Repeat The Game",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: size.maxWidth > heightS
+                          ? heightS * 0.06
+                          : size.maxWidth * 0.06),
+                ),
+              ),
+            );
+          }),
+        ),
+      ],
+    );
+  }
+
+  Expanded _textWinPlay(BuildContext context) {
+    return Expanded(
+        child: AnimatedOpacity(
+      duration: const Duration(seconds: 1),
+      opacity: HomeCubit.get(context).winPlayer.isEmpty ? 0.0 : 1,
+      child: Center(
+        child: Text(
+          HomeCubit.get(context).winPlayer,
+          style: const TextStyle(fontSize: 30, color: Colors.white),
+        ),
+      ),
+    ));
+  }
+
+  Stack _playSpace(
+      double widthS, double heightS, BuildContext context, bool isLandscape) {
+    return Stack(children: [
+      SizedBox(
+        width: widthS,
+        height: isLandscape ? heightS : heightS * 0.5,
+        child: LayoutBuilder(builder: (context, size) {
+          si = size.maxHeight;
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: 30, vertical: isLandscape ? 10 : 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.topLeft,
+                          function: HomeCubit.get(context).p1 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("1");
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p1,
+                          context: context,
+                        ),
+                      ),
+                      Expanded(flex: 1, child: Container()),
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.topCenter,
+                          function: HomeCubit.get(context).p2 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("2");
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p2,
+                          context: context,
+                        ),
+                      ),
+                      Expanded(flex: 1, child: Container()),
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.topRight,
+                          function: HomeCubit.get(context).p3 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("3");
+
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p3,
+                          context: context,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.centerLeft,
+                          function: HomeCubit.get(context).p4 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("4");
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p4,
+                          context: context,
+                        ),
+                      ),
+                      Expanded(flex: 1, child: Container()),
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.center,
+                          function: HomeCubit.get(context).p5 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("5");
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p5,
+                          context: context,
+                        ),
+                      ),
+                      Expanded(flex: 1, child: Container()),
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.centerRight,
+                          function: HomeCubit.get(context).p6 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("6");
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p6,
+                          context: context,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                          flex: 3,
+                          child: newButton(
+                            alignment: Alignment.bottomLeft,
+                            function: HomeCubit.get(context).p7 == ""
+                                ? () {
+                                    HomeCubit.get(context).playChange("7");
+
+                                    if (isAutoplay) {
+                                      HomeCubit.get(context).autoPlay();
+                                    }
+                                  }
+                                : null,
+                            value: HomeCubit.get(context).p7,
+                            context: context,
+                          )),
+                      Expanded(flex: 1, child: Container()),
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.bottomCenter,
+                          function: HomeCubit.get(context).p8 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("8");
+
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p8,
+                          context: context,
+                        ),
+                      ),
+                      Expanded(flex: 1, child: Container()),
+                      Expanded(
+                        flex: 3,
+                        child: newButton(
+                          alignment: Alignment.bottomRight,
+                          function: HomeCubit.get(context).p9 == ""
+                              ? () {
+                                  HomeCubit.get(context).playChange("9");
+
+                                  if (isAutoplay) {
+                                    HomeCubit.get(context).autoPlay();
+                                  }
+                                }
+                              : null,
+                          value: HomeCubit.get(context).p9,
+                          context: context,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
+      ),
+      SizedBox(
+        width: widthS,
+        height: isLandscape ? heightS : heightS * 0.5,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: 30, vertical: isLandscape ? 20 : 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: (HomeCubit.get(context).verticalLine1)
+                          ? line(2, isLandscape ? si : heightS,
+                              Alignment.topLeft, isLandscape)
+                          : Container()),
+                  Expanded(flex: 1, child: Container()),
+                  Expanded(
+                      flex: 3,
+                      child: (HomeCubit.get(context).verticalLine2)
+                          ? line(2, isLandscape ? si : heightS,
+                              Alignment.center, isLandscape)
+                          : Container()),
+                  Expanded(flex: 1, child: Container()),
+                  Expanded(
+                      flex: 3,
+                      child: (HomeCubit.get(context).verticalLine3)
+                          ? line(2, isLandscape ? si : heightS,
+                              Alignment.topRight, isLandscape)
+                          : Container()),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        width: widthS,
+        height: isLandscape ? heightS : heightS * 0.5,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (HomeCubit.get(context).horizontalLine1) Line(1, widthS - 15),
+            const SizedBox(height: 15),
+            if (HomeCubit.get(context).horizontalLine2) Line(1, widthS - 30),
+            const SizedBox(height: 15),
+            if (HomeCubit.get(context).horizontalLine3) Line(1, widthS - 30),
+          ],
+        ),
+      ),
+      if (HomeCubit.get(context).zLine1)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Container(
+              width: widthS,
+              height: isLandscape ? heightS : heightS * 0.50,
+              padding: const EdgeInsets.all(40),
+              child: const Line(0, 0.0)),
+        ),
+      if (HomeCubit.get(context).zLine2)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(40),
+            height: isLandscape ? heightS : heightS * 0.50,
+            child: const Line(0, 0.0, isZ2: true),
+          ),
+        )
+    ]);
+  }
+
+  LayoutBuilder _titleSpace(double heightS) {
+    return LayoutBuilder(builder: (context, size) {
+      return Text(
+        'IT\'S TURN! ${HomeCubit.get(context).player ? " X" : "O"}',
+        style: TextStyle(
+            fontSize:
+                size.maxWidth > heightS ? heightS * 0.1 : size.maxWidth * 0.1,
+            color: Colors.white),
+        textAlign: TextAlign.center,
+      );
+    });
+  }
+
+  Widget line(int state, double heightS, AlignmentGeometry alignment,
+      bool isLandscape) {
     return LayoutBuilder(builder: (context, size) {
       return Container(
         alignment: alignment,
@@ -448,7 +462,8 @@ class PlayScreen extends StatelessWidget {
           width: HomeCubit.get(context).size,
           decoration: const BoxDecoration(),
           clipBehavior: Clip.hardEdge,
-          child: Line(state, heightS * 0.5 - 30),
+          child:
+              Line(state, isLandscape ? heightS * .9 - 30 : heightS * 0.5 - 30),
         ),
       );
     });
