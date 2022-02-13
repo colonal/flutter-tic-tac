@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
 
           // Status bar brightness (optional)
           statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-          statusBarBrightness: Brightness.light, // For iOS (dark icons)
+          statusBarBrightness: Brightness.dark, // For iOS (dark icons)
         ),
       ),
       body: BlocProvider(
