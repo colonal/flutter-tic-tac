@@ -1,16 +1,23 @@
-# tic_tac_game
+# Tic Tac Game
+## flutter project.
 
-A new Flutter project.
 
-## Getting Started
+# Android
+![Untitled-4](https://user-images.githubusercontent.com/64502335/153883825-ac12d746-248b-4503-a4d3-1038379116fc.png)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# IOS
+![Untitled-3](https://user-images.githubusercontent.com/64502335/153883626-f32af31f-78b5-4fae-82ae-7b1fa1369988.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Windows
+![Untitled-6](https://user-images.githubusercontent.com/64502335/153883929-0e3e1c54-60f7-4278-aef8-6f52b6d559ca.png)
+
+
+# [Web](https://colonal.github.io/tic-tac-game/#/)
+![Untitled-5](https://user-images.githubusercontent.com/64502335/153883965-c70c2bb9-6dd0-4a1d-942d-4e52e35cb352.png)
+
+# Landscape
+![Untitled-6](https://user-images.githubusercontent.com/64502335/153888251-c0a4ab68-d225-4a0a-aafd-8dd21f16c067.jpg)
+
+
