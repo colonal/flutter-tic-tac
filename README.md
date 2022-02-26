@@ -1,6 +1,9 @@
 # Tic Tac Game
-## flutter project.
 
+
+# Play Now : [Google Play](https://play.google.com/store/apps/details?id=codes.colonal.tic_tac_game) , [Web](https://colonal.github.io/tic-tac-game/)
+
+# :iphone: Screens
 
 # Android
 ![Untitled-4](https://user-images.githubusercontent.com/64502335/153883825-ac12d746-248b-4503-a4d3-1038379116fc.png)
@@ -14,7 +17,7 @@
 ![Untitled-6](https://user-images.githubusercontent.com/64502335/153883929-0e3e1c54-60f7-4278-aef8-6f52b6d559ca.png)
 
 
-# [Web](https://colonal.github.io/tic-tac-game/#/)
+# Web
 ![Untitled-5](https://user-images.githubusercontent.com/64502335/153883965-c70c2bb9-6dd0-4a1d-942d-4e52e35cb352.png)
 
 # Landscape
